@@ -71,20 +71,9 @@ button {
   font-weight: 500;
 }
 
-.digits {
-  margin: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background: #262826;
-  color: #fff;
-  font-weight: 500;
-}
-
 input:focus,
 input:active,
 button:focus,
-.digits:active,
 button:active {
   outline: none;
 }
