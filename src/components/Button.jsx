@@ -2,13 +2,12 @@ import React from "react";
 import "../App.css";
 
 function Button(props) {
-  const handleClick = () => {
-    props.clickedNum();
-    console.log("clicked");
+  const handleClick = (e) => {
+    props.clickedNum(e);
   };
 
   return (
-    <button name={props.value} onClick={handleClick}>
+    <button name={props.name} onClick={handleClick}>
       {props.name}
     </button>
   );

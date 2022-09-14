@@ -6,13 +6,9 @@ function Calculator() {
   const [result, setResult] = useState("");
 
   const handleClick = (e) => {
-    setResult(result.concat(e.target.name));
-    console.log(e.target.name);
-  };
-
-  const handleDigit = (e) => {
-    setResult(result.concat());
-    console.log(e.target.id);
+    const { name } = e.target;
+    // const target = ;
+    setResult(result.concat(name));
   };
 
   const clear = (e) => {
@@ -45,42 +41,24 @@ function Calculator() {
           <button className="highlight" onClick={backspace} id="backspace">
             C
           </button>
-          <button className="highlight" name="&divide;" onClick={handleClick}>
+          <button className="highlight" name="/" onClick={handleClick}>
             &divide;
           </button>
-          {[7, 8, 9].map((value, index) => (
-            <Button
-              key={value}
-              id={value}
-              name={value.toString()}
-              value={value.toString()}
-              clickedNum={handleDigit}
-            />
+          {[7, 8, 9].map((value) => (
+            <Button name={value.toString()} clickedNum={handleClick} />
           ))}
-          {/* {addRow()} */}
-          <button className="highlight" name="x" onClick={handleClick}>
+
+          <button className="highlight" name="*" onClick={handleClick}>
             &times;
           </button>
           {[4, 5, 6].map((value) => (
-            <Button
-              key={value}
-              id={value}
-              name={value.toString()}
-              value={value.toString()}
-              onClick={handleClick}
-            />
+            <Button name={value.toString()} clickedNum={handleClick} />
           ))}
           <button className="highlight" name="-" onClick={handleClick}>
             &ndash;
           </button>
           {[1, 2, 3].map((value) => (
-            <Button
-              key={value}
-              id={value}
-              name={value.toString()}
-              value={value.toString()}
-              onClick={handleClick}
-            />
+            <Button name={value.toString()} clickedNum={handleClick} />
           ))}
           <button className="highlight" name="+" onClick={handleClick}>
             +
