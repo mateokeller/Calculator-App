@@ -1,10 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import Button from "./Button";
 
-function Calculator() {
+function CalculatorTwo() {
   const [result, setResult] = useState("");
-  const [input, setInput] = useState("");
 
   const handleClick = (e) => {
     const { name } = e.target;
@@ -20,32 +19,37 @@ function Calculator() {
     setResult(result.slice(0, -1));
   };
 
-  const calculate = (e) => {
-    try {
-      // eslint-disable-next-line no-eval
-      setResult(eval(result));
-    } catch (err) {
-      setResult("Error");
-    }
+  const calculate = () => {
+    // var operators = {
+    //   "+": function (x, y) {
+    //     return x + y;
+    //   },
+    //   "-": function (x, y) {
+    //     return x - y;
+    //   },
+    //   "/": function (x, y) {
+    //     return x / y;
+    //   },
+    //   "*": function (x, y) {
+    //     return x * y;
+    //   },
+    // };
+    // switch (operators) {
+    //   case '+':
+    // }
+    // try {
+    //   // eslint-disable-next-line no-eval
+    //   setResult(eval(result));
+    // } catch (err) {
+    //   setResult("Error");
+    // }
   };
-
-  // const handleInput = (e) => {
-  //   if (result === "") {
-  //     return input;
-  //   } else if (calculate) {
-  //     return result;
-  //   }
-  // };
 
   return (
     <div>
       <div className="container">
         <form>
-          <input
-            type="text"
-            value={result}
-            onChange={(event) => setResult(event.target.value)}
-          />
+          <input type="text" value={result} />
         </form>
         <div className="keypad">
           <button className="highlight" onClick={clear} id="clear">
@@ -104,4 +108,4 @@ function Calculator() {
     </div>
   );
 }
-export default Calculator;
+export default CalculatorTwo;

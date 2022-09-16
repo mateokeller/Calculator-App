@@ -60,6 +60,30 @@ input[type="text"] {
 #backspace {
   color: #262826;
 }
+#times {
+  grid-column-start: 4;
+  grid-row-start: 2;
+}
+
+#substract {
+  grid-column-start: 4;
+  grid-row-start: 3;
+}
+
+#addition {
+  grid-column-start: 4;
+  grid-row-start: 4;
+}
+
+#zero {
+  grid-column-start: 1;
+  grid-row-start: 5;
+}
+
+#decimal {
+  grid-column-start: 2;
+  grid-row-start: 5;
+}
 
 button {
   margin: 5px;
