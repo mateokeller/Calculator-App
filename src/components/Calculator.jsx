@@ -1,52 +1,58 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import Button from "./Button";
+import Display from "./Display";
 
 function Calculator() {
-  const [result, setResult] = useState("");
+  const [answer, setAnswer] = useState("");
   const [input, setInput] = useState("");
 
-  const handleClick = (e) => {
-    const { name } = e.target;
-    // const target = ;
-    setResult(result.concat(name));
+  //input
+  const inputHandler = (event) => {
+    if (answer === "Invalid Input!!") return;
+    let val = event.target.name;
+
+    let str = input + val;
+    if (str.length > 10) return;
+
+    if (answer !== "") {
+      setInput(answer + val);
+      setAnswer("");
+    } else setInput(str);
+    // setInput(str);
   };
 
   const clear = (e) => {
-    setResult("");
+    setInput("");
+    setAnswer("");
   };
 
-  const backspace = (e) => {
-    setResult(result.slice(0, -1));
+  // calculate final answer
+  const calculateAns = () => {
+    if (input === "") return;
+    let result = 0;
+    let finalexpression = input;
+    //  finalexpression = input.replaceAll("^", "**");  //for eval()
+    finalexpression = finalexpression.replaceAll("x", "*");
+    finalexpression = finalexpression.replaceAll("÷", "/");
+    // eslint-disable-next-line no-eval
+    result = eval(finalexpression);
+
+    isNaN(result) ? setAnswer(result) : setAnswer(Math.floor(result, 3));
   };
 
-  const calculate = (e) => {
-    try {
-      // eslint-disable-next-line no-eval
-      setResult(eval(result));
-    } catch (err) {
-      setResult("Error");
-    }
+  // remove last character
+  const backspace = () => {
+    if (answer !== "") {
+      setInput(answer.toString().slice(0, -1));
+      setAnswer("");
+    } else setInput((prev) => prev.slice(0, -1));
   };
-
-  // const handleInput = (e) => {
-  //   if (result === "") {
-  //     return input;
-  //   } else if (calculate) {
-  //     return result;
-  //   }
-  // };
 
   return (
     <div>
       <div className="container">
-        <form>
-          <input
-            type="text"
-            value={result}
-            onChange={(event) => setResult(event.target.value)}
-          />
-        </form>
+        <Display input={input} setInput={setInput} answer={answer} />
         <div className="keypad">
           <button className="highlight" onClick={clear} id="clear">
             Clear
@@ -58,19 +64,21 @@ function Calculator() {
             className="highlight"
             id="divide"
             name="/"
-            onClick={handleClick}
+            onClick={inputHandler}
           >
             &divide;
           </button>
           {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((value) => {
-            return <Button key={value} name={value} clickedNum={handleClick} />;
+            return (
+              <Button key={value} name={value} clickedNum={inputHandler} />
+            );
           })}
 
           <button
             className="highlight"
             id="times"
             name="*"
-            onClick={handleClick}
+            onClick={inputHandler}
           >
             &times;
           </button>
@@ -79,7 +87,7 @@ function Calculator() {
             className="highlight"
             id="substract"
             name="-"
-            onClick={handleClick}
+            onClick={inputHandler}
           >
             &ndash;
           </button>
@@ -88,15 +96,15 @@ function Calculator() {
             className="highlight"
             id="addition"
             name="+"
-            onClick={handleClick}
+            onClick={inputHandler}
           >
             +
           </button>
-          <Button name="0" id="zero" clickedNum={handleClick} />
-          <button name="." id="decimal" onClick={handleClick}>
+          <Button name="0" id="zero" clickedNum={inputHandler} />
+          <button name="." id="decimal" onClick={inputHandler}>
             .
           </button>
-          <button className="highlight" onClick={calculate} id="result">
+          <button className="highlight" onClick={calculateAns} id="result">
             =
           </button>
         </div>
